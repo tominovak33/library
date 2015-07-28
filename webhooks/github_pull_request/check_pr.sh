@@ -1,4 +1,4 @@
-FS=$'\n'; # Lets the for loop split the input on newline char
+IFS=$'\n'; # Lets the for loop split the input on newline char
 counter=0;
 
 for line in $(cat pr_test.txt);
