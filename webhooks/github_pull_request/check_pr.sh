@@ -1,16 +1,5 @@
-IFS=$'\n'; # Lets the for loop split the input on newline char
-counter=0;
-
-for line in $(cat pr_test.txt);
-  do
-  if [ $counter -eq 0 ];
-    then
-     pr_number="$line"
-  elif [ $counter -eq 1];
-    then
-    branch_name="$line"
-  fi
-  counter=$(expr $counter + 1)
-done
-
-./deploy_pr.sh "$pr_number" "$branch_name"
+if [ -f "pr.txt" ]; then
+  # IF the pr file exists then call the deployment script
+  ./deploy_pr.sh $(cat pr.txt)
+  rm pr.txt # Remove the file to indicate that the deploy has been triggered
+fi
