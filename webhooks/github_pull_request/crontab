@@ -1,0 +1,2 @@
+SHELL=/bin/bash
+*/2 * * * * sh ~/webhook/check_pr.sh
