@@ -1,22 +1,21 @@
 # Enable vhost_alias module
 
 <VirtualHost *:80>
-	ServerName wildcard.example.com
+  ServerName wildcard.example.com
   ServerAlias *.wildcard.example.com
 
   UseCanonicalName Off
+  # Set the document root to whatever the * is in *.wildcard.example.com in the request url
+  VirtualDocumentRoot /var/www/%1/
 
-	# Set the document root to whatever the * is in *.wildcard.example.com in the request url
-	VirtualDocumentRoot /var/www/%1/
 
+    <Directory /var/www/>
+      Options Indexes FollowSymLinks
+      AllowOverride All
+      Require all granted
+    </Directory>
 
-	<Directory /var/www/>
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-	</Directory>
-
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
 
 </VirtualHost>
