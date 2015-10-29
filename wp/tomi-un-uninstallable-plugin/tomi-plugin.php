@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Tomi Uninstallable Plugin
+Plugin Name: Tomi Un-uninstallable Plugin
 Description: A WP pluign that is hard to uninstall
 Version: 0.0.1
 Author: Tomi Novak
