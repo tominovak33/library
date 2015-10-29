@@ -24,3 +24,7 @@ Once the raw data has been processed, the tool returns a formatted (google calen
 ###### Issues with my solution:
 
 * While the one benefit of using the timetable system would be that it can be updated by the university, however this does not really matter for two simple reasons. Firstly so far once I have been notified on a different notice feed that my seminar was cancelled with no update every actually made to the timetable system. Secondly, when the system was actually updated the other time I, was sent an email regarding the change anyway the day before. This means that the fact that not getting the actual timetable system updates is acceptable to me.
+
+#### License:
+
+This software is licensed under the GPL 3.0 license (see LICENSE file)
