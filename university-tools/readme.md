@@ -1,5 +1,7 @@
 # University Calendar Converter
 
+##### A short script to convert the university specific timetable format to be google calendar compatible
+
 #### Background info
 
 ###### My university lecture timetable/calendar system is some strange proprietary thing which has the following issues:
