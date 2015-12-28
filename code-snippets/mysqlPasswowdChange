@@ -1,0 +1,3 @@
+mysql -u root -h localhost -p
+SET PASSWORD FOR 'userName'@'hostnameName' = PASSWORD('newPassword');
+FLUSH PRIVILEGES;
