@@ -1,3 +1,4 @@
+<?php
 /*
  * Calculates as the crow flies distance between two sets of coordinates
  *
