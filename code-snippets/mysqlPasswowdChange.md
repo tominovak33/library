@@ -1,9 +1,4 @@
-mysql -u root -h localhost -p
-SET PASSWORD FOR 'userName'@'hostnameName' = PASSWORD('newPassword');
-FLUSH PRIVILEGES;
-
-
-# Root password reset:
+# Root password reset/recovery:
 
 /etc/init.d/mysql stop
 mysqld_safe --skip-grant-tables &
@@ -17,3 +12,10 @@ mysql> quit
 /etc/init.d/mysql stop
 /etc/init.d/mysql start
 mysql -u root -p
+
+
+# Normal password change:
+
+mysql -u root -h localhost -p
+SET PASSWORD FOR 'userName'@'hostnameName' = PASSWORD('newPassword');
+FLUSH PRIVILEGES;
