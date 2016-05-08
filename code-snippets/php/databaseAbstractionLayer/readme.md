@@ -1,14 +1,33 @@
 # Tomi php mysqli database abstraction layer
 
-* Uses php's mysqli extension
+## Description
 
-        require ('config.php');
-        require ('Database.php');
+A extremely basic and lightweight sql database abstraction layer for php.
 
-        $Database = new Database(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+## Notice
 
-        $res = $Database->query("SELECT * FROM `test` WHERE 1");
+This was created with the purpose of using it for quick testing and prototyping, NOT for production use.
 
-        $allRows = $Database->allRows($res);
+Due to the lack of good error handling and very basic functionality, I would not recommend using this for production applications.
 
-        echo ($allRows);
+## Requirements
+
+  * php version:
+      * Tested on 5.6
+      * (Probably) works on 5.2 - 5.6
+  * php mysqli extension
+
+## Example use
+
+      <?php
+
+      require ('config.php');
+      require ('Database.php');
+
+      $Database = new Database(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+      $res = $Database->query("SELECT * FROM `test` WHERE 1");
+
+      $allRows = $Database->allRows($res);
+
+      echo ($allRows);
