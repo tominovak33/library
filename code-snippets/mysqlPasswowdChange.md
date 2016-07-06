@@ -1,21 +1,21 @@
 # Root password reset/recovery:
 
-/etc/init.d/mysql stop
-mysqld_safe --skip-grant-tables &
-mysql -u root
+`/etc/init.d/mysql stop`
+`mysqld_safe --skip-grant-tables &`
+`mysql -u root`
 
-mysql> use mysql;
-mysql> update user set password=PASSWORD("my-password-here") where User='root';
-mysql> flush privileges;
-mysql> quit
+`mysql> use mysql;`
+`mysql> update user set password=PASSWORD("my-password-here") where User='root';`
+`mysql> flush privileges;`
+`mysql> quit`
 
-/etc/init.d/mysql stop
-/etc/init.d/mysql start
-mysql -u root -p
+`/etc/init.d/mysql stop`
+`/etc/init.d/mysql start`
+``mysql -u root -p`
 
 
 # Normal password change:
 
-mysql -u root -h localhost -p
-SET PASSWORD FOR 'userName'@'hostnameName' = PASSWORD('newPassword');
-FLUSH PRIVILEGES;
+`mysql -u root -h localhost -p`
+`SET PASSWORD FOR 'userName'@'hostnameName' = PASSWORD('newPassword');`
+`FLUSH PRIVILEGES;`
