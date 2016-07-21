@@ -21,21 +21,21 @@
 
     * Copy the following into `/etc/apache2/sites-available/python.conf`:
 
-          <VirtualHost *:80>
-
-              ServerName python.local.dev
-              ServerAlias wsgi.local.dev
-              ServerAdmin tomi@example.com
-
-              DocumentRoot /var/www/python/
-
-              <Directory /var/www/python>
-                  Require all granted
-              </Directory>
-
-              WSGIScriptAlias / /var/www/python/app/main.wsgi
-
-          </VirtualHost>
+           <VirtualHost *:80>
+ 
+               ServerName python.local.dev
+               ServerAlias wsgi.local.dev
+               ServerAdmin tomi@example.com
+ 
+               DocumentRoot /var/www/python/
+ 
+               <Directory /var/www/python>
+                   Require all granted
+               </Directory>
+ 
+               WSGIScriptAlias / /var/www/python/app/main.wsgi
+ 
+           </VirtualHost>
 
 
   * Enable the virtual host
@@ -47,7 +47,9 @@
     * Paste the following into the wsgi script you created:
 
           def application(environ, start_response):
+          
               status = '200 OK'
+          
               output = 'Hello World!'
 
               response_headers = [('Content-type', 'text/plain'),
