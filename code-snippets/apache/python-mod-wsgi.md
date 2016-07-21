@@ -22,21 +22,21 @@
     * Copy the following into `/etc/apache2/sites-available/python.conf`:
 
 
-           <VirtualHost *:80>
- 
-               ServerName python.local.dev
-               ServerAlias wsgi.local.dev
-               ServerAdmin tomi@example.com
- 
-               DocumentRoot /var/www/python/
- 
-               <Directory /var/www/python>
-                   Require all granted
-               </Directory>
- 
-               WSGIScriptAlias / /var/www/python/app/main.wsgi
- 
-             </VirtualHost>
+    <VirtualHost *:80>
+
+        ServerName python.local.dev
+        ServerAlias wsgi.local.dev
+        ServerAdmin tomi@example.com
+
+        DocumentRoot /var/www/python/
+
+        <Directory /var/www/python>
+            Require all granted
+        </Directory>
+
+        WSGIScriptAlias / /var/www/python/app/main.wsgi
+
+    </VirtualHost>
 
 
 
@@ -49,17 +49,17 @@
     * Paste the following into the wsgi script you created:
 
 
-          def application(environ, start_response):
-          
-              status = '200 OK'
-          
-              output = 'Hello World!'
+             def application(environ, start_response):
 
-              response_headers = [('Content-type', 'text/plain'),
-                                  ('Content-Length', str(len(output)))]
-              start_response(status, response_headers)
+                 status = '200 OK'
 
-              return [output]
+                 output = 'Hello World!'
+
+                 response_headers = [('Content-type', 'text/plain'),
+                                     ('Content-Length', str(len(output)))]
+                 start_response(status, response_headers)
+
+                 return [output]
 
 
 ##### Navigate to the address defined in your Vhost file to see your application being served
