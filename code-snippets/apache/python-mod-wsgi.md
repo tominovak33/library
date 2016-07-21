@@ -21,6 +21,7 @@
 
     * Copy the following into `/etc/apache2/sites-available/python.conf`:
 
+
            <VirtualHost *:80>
  
                ServerName python.local.dev
@@ -35,7 +36,8 @@
  
                WSGIScriptAlias / /var/www/python/app/main.wsgi
  
-           </VirtualHost>
+             </VirtualHost>
+
 
 
   * Enable the virtual host
@@ -45,6 +47,7 @@
   * Create a directory/directories and wsgi script to match the paths you put in your vhost conf
 
     * Paste the following into the wsgi script you created:
+
 
           def application(environ, start_response):
           
