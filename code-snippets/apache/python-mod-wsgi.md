@@ -22,21 +22,23 @@
     * Copy the following into `/etc/apache2/sites-available/python.conf`:
 
 
-    <VirtualHost *:80>
+  ```
+  <VirtualHost *:80>
 
-        ServerName python.local.dev
-        ServerAlias wsgi.local.dev
-        ServerAdmin tomi@example.com
+      ServerName python.local.dev
+      ServerAlias wsgi.local.dev
+      ServerAdmin tomi@example.com
 
-        DocumentRoot /var/www/python/
+      DocumentRoot /var/www/python/
 
-        <Directory /var/www/python>
-            Require all granted
-        </Directory>
+      <Directory /var/www/python>
+          Require all granted
+      </Directory>
 
-        WSGIScriptAlias / /var/www/python/app/main.wsgi
+      WSGIScriptAlias / /var/www/python/app/main.wsgi
 
-    </VirtualHost>
+  </VirtualHost>
+  ```
 
 
 
