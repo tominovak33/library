@@ -9,7 +9,7 @@ var links = document.querySelectorAll('a[href]');
 [].forEach.call(links, function(link) {
 	url_value = link.href
 
- if (url_value.indexOf(window.location.href) == -1) {
+ if (url_value.indexOf(window.location.host) == -1) {
 	link.setAttribute("target","_blank")
  } 
  
