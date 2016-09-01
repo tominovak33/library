@@ -8,16 +8,19 @@
   <body>
     <div class="row">
       <div class="col-md-4 col-md-offset-4">
-        <h1 class="page-header">Bcrypt Hashing Form</h1>
-        <form action="/" method="post">
-          <label for="hash_input">Hash Input</label>
-          <input class="form-control" type="text" name="hash_input" id="hash_input"/>
-          <br />
-          <label for="hash_rounds">Hash Rounds</label>
-          <input class="form-control" type="number" min=1 max=12 name="hash_rounds" id="hash_rounds" placeholder="1"/>
-          <br />
-          <button class="btn btn-primary" type="submit">Submit</button>
-        </form>
+        <h1 class="page-header">Bcrypt Hash Tools</h1>
+        <ul>
+          <li>
+            <label>
+              <a href="/hash_password">Hash a password</a>
+            </label>
+          </li>
+          <li>
+            <label>
+              <a href="/check_password">Check a password hash</a>
+            </label>
+          </li>
+        </ul>
       </div>
     </div>
   </body>
