@@ -19,7 +19,13 @@ app.get('/', function (req, res) {
   res.sendFile(abs_path);
 });
 
-app.post('/', function(req, res) {
+app.get('/hash_password', function (req, res) {
+  var abs_path = path.resolve(__dirname+'/hash_password.html');
+  res.status(200)
+  res.sendFile(abs_path);
+});
+
+app.post('/hash_password', function(req, res) {
   var hash_input = req.body.hash_input
   var hash_rounds = parseInt(req.body.hash_rounds)
   var hash_rounds = hash_rounds < 13 && hash_rounds > 0 ? hash_rounds : 1;
@@ -36,8 +42,36 @@ app.post('/', function(req, res) {
   });
 });
 
+app.get('/check_password', function (req, res) {
+  var abs_path = path.resolve(__dirname+'/check_password.html');
+  res.status(200)
+  res.sendFile(abs_path);
+});
+
+app.post('/check_password', function(req, res) {
+  var password_plaintext = req.body.password_plaintext
+  var bcrypt_hash = req.body.bcrypt_hash
+
+  var start_time = Math.floor(Date.now())
+  var hashed_password = bcrypt.hashSync(password_plaintext, bcrypt_hash);
+  var end_time = Math.floor(Date.now())
+  var time_diff = (end_time - start_time)/1000
+
+  if (hashed_password == bcrypt_hash) {
+    var match = true
+  } else {
+    var match = false
+  }
+
+  res.status(200)
+  res.json({
+    'match': match,
+    'time_taken_seconds': time_diff
+  });
+});
+
 // Start the server
-var server = app.listen(process.env.PORT || '8080', function () {
+var server = app.listen(process.env.PORT || '3000', function () {
   console.log('App listening on port %s', server.address().port);
   console.log('Press Ctrl+C to quit.');
 });
