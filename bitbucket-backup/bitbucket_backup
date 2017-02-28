@@ -1,0 +1,53 @@
+#!/bin/bash
+
+BITBUCKET_USER="<USERNAME>"
+BITBUCKET_API="https://api.bitbucket.org/2.0"
+
+BITBUCKET_AUTH_USERNAME="<USERNAME>"
+# Set up app password in https://bitbucket.org/account/user/<username>/app-passwords
+BITBUCKET_AUTH_PASSWORD="<APP PASSWORD>"
+
+BITBUCKET_CURL_OPTIONS="-u ${BITBUCKET_AUTH_USERNAME}:${BITBUCKET_AUTH_PASSWORD}"
+BITBUCKET_REPOLIST_URL="${BITBUCKET_API}/repositories/${BITBUCKET_USER}?&pagelen=1"
+
+GIT_CLONE_CMD="git clone --quiet --mirror"
+BITBUCKET_GIT_BASE_URL="git@bitbucket.org:"
+
+BACKUP_DESTINATION_FOLDER="<PATH TO BACKUP>" # Base folder for backups
+DELETE_OLD_BACKUPS=true # Remove old backups after a certain amount of times
+DAYS_TO_KEEP_BACKUPS=14 # Only used if DELETE_OLD_BACKUPS is true
+
+CURRENT_TIME=`date "+%Y%m%d-%H%M"`
+
+echo "<<<< Getting list of user repositories >>>>"
+
+REPOS=""
+while [ $BITBUCKET_REPOLIST_URL ]; do
+  REPOLIST_CURL_CONTENT=$(curl --silent -H "Content-Type: application/json" $BITBUCKET_CURL_OPTIONS $BITBUCKET_REPOLIST_URL)
+  BITBUCKET_REPOLIST_URL=$(echo "${REPOLIST_CURL_CONTENT}" | awk -F '"next":' '{print $2}' | awk -F \" '{print $2}' | sed '/^$/d')
+  # CLONE_URL=$(echo $REPOLIST_CURL_CONTENT | jq '.values[].links.clone[] | select(.name == "ssh") .href' | awk -F 'ssh://' '{print $2}'| sed -e 's/"//g')
+  # REPOS="${REPOS} ${CLONE_URL} "
+  REPO_NAME=$(echo $REPOLIST_CURL_CONTENT | jq '.values[].name' | sed -e 's/"//g' )
+  REPOS="${REPOS} ${REPO_NAME}"
+done
+
+# Create a tar archive of a file/folder then remove the original
+function tar_and_remove {
+   tar -zcf $1.tar.gz $1 && rm -rf $1
+}
+
+for REPO in $REPOS; do
+  echo "<<<< Backing up ${BITBUCKET_USER} / ${REPO} >>>>"
+  $(${GIT_CLONE_CMD} ${BITBUCKET_GIT_BASE_URL}${BITBUCKET_USER}/${REPO}.git ${BACKUP_DESTINATION_FOLDER}/${BITBUCKET_USER}/${REPO}-${CURRENT_TIME}.git && tar_and_remove ${BACKUP_DESTINATION_FOLDER}/${BITBUCKET_USER}/${REPO}-${CURRENT_TIME}.git)
+done
+
+echo "<<<< Backups completed >>>>"
+
+if $DELETE_OLD_BACKUPS; then
+  echo "<<<< Deleting old backups >>>>"
+  echo "Removing `find $BACKUP_DESTINATION_FOLDER -name '*.tar.gz' -mtime +$DAYS_TO_KEEP_BACKUPS | wc -l` old backups"
+  find $BACKUP_DESTINATION_FOLDER -name '*.tar.gz' -mtime +$DAYS_TO_KEEP_BACKUPS -exec rm -fv {} > /dev/null \;
+fi
+
+echo "<<<< Process completed >>>>"
+exit 0
