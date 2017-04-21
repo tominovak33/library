@@ -1,4 +1,26 @@
 # Adapted from https://github.com/dmfilipenko/timezones.json
+
+def get_timezone_list():
+  timezone_list = []
+
+  for timezone in timezones:
+    if 'utc' in timezone:
+        for timezone_subregion in timezone['utc']:
+            timezone_list.append(timezone_subregion)
+
+  return sorted(timezone_list, reverse=False)
+
+
+def get_timezone_offset_mapping():
+  timezone_mapping = {}
+
+  for timezone in timezones:
+    if 'utc' in timezone and'utc' in timezone:
+      for timezone_subregion in timezone['utc']:
+        timezone_mapping[timezone_subregion] = timezone['offset']
+
+  return timezone_mapping
+
 timezones = [{
     "value": "Dateline Standard Time",
     "abbr": "DST",
