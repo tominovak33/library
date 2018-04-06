@@ -30,3 +30,14 @@ sudo mount -t nfs 192.168.1.33:/path/to/nfs/share /home/tomi/path/to/local/folde
     python get-pip.py
     
     
+## USB Tools
+
+### Create Bootable USB Stick
+
+Get list of disks and note label of disk to use
+    
+    sudo fdisk -l
+    
+Write ISO file to disk from above (replace sdX with the label found above)
+
+    sudo dd bs=4M if=/path/to/<iso-file-name>.iso of=/dev/sdX status=progress && sync 
