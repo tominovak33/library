@@ -41,3 +41,16 @@ Get list of disks and note label of disk to use
 Write ISO file to disk from above (replace sdX with the label found above)
 
     sudo dd bs=4M if=/path/to/<iso-file-name>.iso of=/dev/sdX status=progress && sync 
+    
+    
+## Image Tools
+
+Create an .ico file from a .png (Linux)
+
+Make sure imagemagick is installed 
+
+    sudo apt-get install imagemagick
+    
+Swap details in line below (eg: 128 for desired output size)    
+
+    convert -resize x128 -gravity center -crop 128x128+0+0 input.png -flatten -colors 128 -background transparent output.ico
