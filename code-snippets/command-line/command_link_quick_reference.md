@@ -53,4 +53,4 @@ Make sure imagemagick is installed
     
 Swap details in line below (eg: 128 for desired output size)    
 
-    convert -resize x128 -gravity center -crop 128x128+0+0 input.png output.ico
+    convert -resize x128 input.png output.ico
