@@ -54,3 +54,10 @@ Make sure imagemagick is installed
 Swap details in line below (eg: 128 for desired output size)    
 
     convert -resize x128 input.png output.ico
+    
+    
+## Offline Website
+
+Clone a website to use offline
+
+wget -p -k -m --read-timeout=60 --user-agent='<user-agent>' -r -w 1 -e robots=off --content-disposition <website-url>
