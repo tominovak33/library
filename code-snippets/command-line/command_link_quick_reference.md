@@ -61,3 +61,16 @@ Swap details in line below (eg: 128 for desired output size)
 Clone a website to use offline
 
 wget -p -k -m --read-timeout=60 --user-agent='<user-agent>' -r -w 1 -e robots=off --content-disposition <website-url>
+
+
+## Rename Files
+
+(Remove spaces from filenames and lowercase them)
+
+#### Swap spaces to underscores in file and foldernames
+find ./<target-folder>/ -depth -name "* *" -execdir rename 's/ /_/g' "{}" \;
+
+##### Lowercase names of files and folders
+find ./<target-folder>/ -depth -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \;
+
+
