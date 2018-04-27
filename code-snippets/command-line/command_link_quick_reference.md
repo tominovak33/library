@@ -74,3 +74,10 @@ find ./<target-folder>/ -depth -name "* *" -execdir rename 's/ /_/g' "{}" \;
 find ./<target-folder>/ -depth -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \;
 
 
+## Google Cloud Storage
+
+#### Set cache times for content in google cloud storage bucket
+
+Set 10 day cache time for all items in a bucket
+
+    `gsutil setmeta -h "Cache-Control:public,max-age=864000" -r gs://<bucket-name>/* `
