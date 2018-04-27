@@ -68,10 +68,12 @@ wget -p -k -m --read-timeout=60 --user-agent='<user-agent>' -r -w 1 -e robots=of
 (Remove spaces from filenames and lowercase them)
 
 #### Swap spaces to underscores in file and foldernames
-find ./<target-folder>/ -depth -name "* *" -execdir rename 's/ /_/g' "{}" \;
+
+    `find ./<target-folder>/ -depth -name "* *" -execdir rename 's/ /_/g' "{}" \;`
 
 ##### Lowercase names of files and folders
-find ./<target-folder>/ -depth -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \;
+
+    `find ./<target-folder>/ -depth -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \;`
 
 
 ## Google Cloud Storage
